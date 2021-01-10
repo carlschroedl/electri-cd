@@ -20,9 +20,8 @@ function buildUrl() {
 }
 
 function createTempDirectory() {
-    const tempDirectory = tmp.dirSync();
-    console.log('tempDirectory');
-    console.dir(tempDirectory);
+    const tempDirectory = tmp.dirSync().name;
+    console.log('tempDirectory: tempDirectory');
     return tempDirectory;
 }
 
