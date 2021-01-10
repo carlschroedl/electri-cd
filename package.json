@@ -1,15 +1,18 @@
 {
   "name": "electri-cd",
   "version": "1.0.0",
-  "description": "High-Voltage Serverless Continuous Integration",
+  "description": "High-Voltage Serverless Continuous Deployment", 
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "extract-zip": "^2.0.1",
     "tmp": "^0.2.1"
+  },
+  "devDependencies": {
+     "jest": "^26.6.3"
+  },
+  "scripts": {
+     "test": "jest"
   }
 }
