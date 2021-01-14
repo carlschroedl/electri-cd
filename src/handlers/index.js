@@ -1,6 +1,6 @@
 const child_process = require("child_process");
 const fs = require('fs');
-const https = require('https');
+const {https} = require('follow-redirects');
 const extract = require('extract-zip');
 const tmp = require('tmp');
 
@@ -21,7 +21,7 @@ function buildUrl() {
 
 function createTempDirectory() {
     const tempDirectory = tmp.dirSync().name;
-    console.log('tempDirectory: tempDirectory');
+    console.log('tempDirectory: ' + tempDirectory);
     return tempDirectory;
 }
 
@@ -77,16 +77,21 @@ async function download(url, filePath) {
 }
 
 async function unzip(zipFile, destination) {
-    await extract(file, {
+    await extract(zipFile, {
         dir: destination
     });
 }
 
-function runScript(scriptPath) {
+function runDeploymentScript(scriptDirectory) {
+    let scriptPath = scriptDirectory + '/deploy.sh'
+    if (!fs.existsSync(scriptPath)) {
+      scriptPath = scriptDirectory + '/*/deploy.sh';
+    }
     const output = child_process.execSync(
-        'scriptPath',
+        'bash ' + scriptPath,
         {
-            encoding: 'UTF-8' 
+          encoding: 'UTF-8' ,
+          stdio: 
         }
     );
     return output;
