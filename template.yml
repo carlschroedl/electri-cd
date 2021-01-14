@@ -23,7 +23,7 @@ Resources:
       Handler: src/handlers/index.handler
       Runtime: nodejs12.x
       MemorySize: 128
-      Timeout: 1000
+      Timeout: 900
       Description: Downloads, decompresses an archive. Runs the deployment script within.
       Policies:
         - AWSLambdaBasicExecutionRole
