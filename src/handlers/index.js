@@ -15,8 +15,8 @@ exports.handler = async (event) => {
     return response;
 };
 
-function buildUrl() {
-    return 'https://github.com/carlschroedl/deployment-example/archive/1.0.0.zip';
+function buildUrl(event) {
+    return event.url;
 }
 
 function createTempDirectory() {
@@ -82,7 +82,7 @@ async function unzip(zipFile, destination) {
     });
 }
 
-function runDeploymentScript(scriptDirectory) {
+function runDeploymentScript(scriptDirectory) { 
     let scriptPath = scriptDirectory + '/deploy.sh'
     if (!fs.existsSync(scriptPath)) {
       scriptPath = scriptDirectory + '/*/deploy.sh';
@@ -90,8 +90,7 @@ function runDeploymentScript(scriptDirectory) {
     const output = child_process.execSync(
         'bash ' + scriptPath,
         {
-          encoding: 'UTF-8' ,
-          stdio: 
+          encoding: 'UTF-8'
         }
     );
     return output;
